@@ -1,0 +1,10 @@
+{% if include.media %}
+{% assign media={{include.media}} %}
+<div class="media">
+  <img src="{{media.image.url}}" class="mr-3" alt="...">
+  <div class="media-body">
+    <h5 class="mt-0">{{ media.heading }}</h5>
+    {{ media.content }}
+  </div>
+</div>
+{% endif %}
