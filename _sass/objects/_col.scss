@@ -1,0 +1,102 @@
+// Grid Column Object
+
+
+$iota-objs-column-name        : 'col' !default;
+
+$iota-objs-column-namespace    : '' !default;
+
+$iota-objs-column-number      : $iota-global-columns !default;
+
+$iota-objs-column-delimiter    : \/ !default;
+$iota-objs-gutter-default     : $iota-global-gutter-default !default;
+$iota-objs-column-res          : true;
+$iota-objs-column-breakpoints  : $iota-global-breakpoints !default;
+
+// New style column object (.o-col)
+$iota-objs-var-col : $iota-global-objects-namespace + $iota-objs-column-name;
+
+
+
+// Helper Local Variables
+
+// $iota-utils-size-var-size: $iota-global-utilities-namespace + $iota-utils-size-namespace;
+
+
+// Base Column
+
+.#{$iota-objs-var-col} {
+    position: relative;
+    @include _iota-generate-unit('padding', 'left', $iota-objs-gutter-default);
+    width: 100%;
+    box-sizing: inherit;
+}
+
+@if( $iota-objs-grid-flex == true ){
+    .#{$iota-objs-var-col} {
+      box-sizing: inherit;
+      flex-basis: 0;
+      flex-grow: 1;
+      min-width: 0;
+      max-width: 100%;
+    }
+}
+
+// Size Utilities
+
+@each $column-size in $iota-objs-column-number {
+
+  @for $i from 1 through $column-size {
+
+    .#{$iota-objs-var-col + '-' + $i + $iota-objs-column-delimiter + $column-size} {
+        @extend .#{$iota-objs-var-col};
+        flex: 0 0 ((100 / $column-size) * $i) * 1%;
+        width: ((100 / $column-size) * $i) * 1% !important;
+    }
+
+  }
+
+}
+
+
+
+
+// Responsive Size Utilities
+
+@if ($iota-objs-column-res == true) {
+
+    @each $breakpoint-name, $breakpoint-size in $iota-objs-column-breakpoints {
+
+        @each $column-size in $iota-objs-column-number {
+
+            @for $i from 1 through $column-size {
+
+                .#{$iota-objs-var-col + '-' + $i + $iota-objs-column-delimiter + $column-size + $iota-global-breakpoint-separator + $breakpoint-name} {
+                    @extend .#{$iota-objs-var-col};
+                }
+            }
+        }
+
+    }
+
+  @each $breakpoint-name, $breakpoint-size in $iota-objs-column-breakpoints {
+
+    @media #{$breakpoint-size} {
+
+      @each $column-size in $iota-objs-column-number {
+
+        @for $i from 1 through $column-size {
+
+          .#{$iota-objs-var-col + '-' + $i + $iota-objs-column-delimiter + $column-size + $iota-global-breakpoint-separator + $breakpoint-name} {
+            width: ((100 / $column-size) * $i) * 1% !important;
+            flex: 0 0 ((100 / $column-size) * $i) * 1%;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
