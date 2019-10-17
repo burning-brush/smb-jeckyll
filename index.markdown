@@ -5,12 +5,7 @@
 layout: default
 ---
 
-<div class="o-grid">
-    <div class="o-col-3/12"> one </div>
-    <div class="o-col"> two </div>
-</div>
-<div class="o-grid">
-    <div class="o-col-12/12 o-col-3/12@md"> one </div>
-    <div class="o-col"> two </div>
-</div>
+Act out your dirtiest __Fantasies__ with the __BEST__ synthetic urin world round!
+
+{% include front-page/testimonials.html %}
 
